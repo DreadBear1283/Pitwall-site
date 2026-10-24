@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email Confirmed</title>
+<style>
+  body { font: 16px/1.6 system-ui, sans-serif; max-width: 720px; margin: 0 auto; padding: 24px 16px 64px; color: #111; background: #fff; }
+  h1 { font-size: 28px; }
+  @media (prefers-color-scheme: dark) { body { color: #eee; background: #000; } a { color: #D8A62A; } }
+</style>
+</head>
+<body>
+<h1 id="title">Email confirmed</h1>
+<p id="body">Your Pitwall account is ready. Go back to the app and sign in with your email and password.</p>
+<script>
+  // The confirmation link puts a login in the address; drop it so it isn't
+  // left in history or shared by accident.
+  var params = new URLSearchParams(location.hash.slice(1));
+  if (params.get('error')) {
+    document.getElementById('title').textContent = 'That link didn’t work';
+    document.getElementById('body').textContent = 'It may have expired or already been used. In the app, sign in with your email and password; if it says your email isn’t confirmed, send the email again.';
+  }
+  history.replaceState(null, '', location.pathname);
+</script>
+</body>
+</html>
